@@ -14,6 +14,7 @@ var fs = require('fs');
 var path = require('path');
 var bodyParser = require('body-parser');
 var router = express.Router();
+require('dotenv').config();
 
 var enableCORS = function(req, res, next) {
   if (!process.env.DISABLE_XORIGIN) {
@@ -30,6 +31,8 @@ var enableCORS = function(req, res, next) {
   }
   next();
 };
+
+mongoose.connect(process.env.MONGO_URI);
 
 // global setting for safety timeouts to handle possible
 // wrong callbacks that will never be called
